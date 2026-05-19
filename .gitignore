@@ -61,9 +61,13 @@ coverage.xml
 *.key
 secrets/
 
-# Data (large files; keep small samples in data/samples/ only)
+# Data — large source files stay local; folder structure tracked via .gitkeep
 data/*
 !data/.gitkeep
+!data/raw/
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/SOURCES.md
 !data/samples/
 
 # Notebook outputs
