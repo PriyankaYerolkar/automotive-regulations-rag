@@ -65,7 +65,8 @@ secrets/
 data/*
 !data/.gitkeep
 !data/raw/
-data/raw/*
+data/raw/*.pdf
+data/chroma/
 !data/raw/.gitkeep
 !data/raw/SOURCES.md
 !data/samples/
