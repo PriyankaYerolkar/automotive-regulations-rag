@@ -25,8 +25,8 @@ import chromadb
 
 logger = logging.getLogger("embed_index")
 
-MODEL = "text-embedding-3-small"   # 1536-dim; needs no query/passage prefix
-EMBED_BATCH = 256                  # inputs per API call (limit is 2048 / 8191 tok)
+MODEL = "text-embedding-3-small"  # 1536-dim; needs no query/passage prefix
+EMBED_BATCH = 256  # inputs per API call (limit is 2048 / 8191 tok)
 COLLECTION = "fmvss_571_208"
 TOP_K = 5
 
@@ -34,8 +34,14 @@ TOP_K = 5
 # These are the chunk fields that travel as metadata; `text` becomes the
 # document body and `chunk_id` becomes the Chroma id.
 META_FIELDS = (
-    "regulation", "section", "subsection", "page",
-    "effective_date", "source_url", "parent_heading", "part_index",
+    "regulation",
+    "section",
+    "subsection",
+    "page",
+    "effective_date",
+    "source_url",
+    "parent_heading",
+    "part_index",
 )
 
 
@@ -62,11 +68,10 @@ class OpenAIEmbedder:
     def __call__(self, texts: list[str]) -> list[list[float]]:
         vectors: list[list[float]] = []
         for start in range(0, len(texts), self._batch):
-            batch = texts[start:start + self._batch]
+            batch = texts[start : start + self._batch]
             resp = self._client.embeddings.create(model=self._model, input=batch)
             vectors.extend(item.embedding for item in resp.data)
-            logger.info("embedded %d/%d", min(start + self._batch, len(texts)),
-                        len(texts))
+            logger.info("embedded %d/%d", min(start + self._batch, len(texts)), len(texts))
         return vectors
 
 
@@ -101,7 +106,8 @@ def build_index(
     if collection_name in {c.name for c in client.list_collections()}:
         client.delete_collection(collection_name)
     collection = client.create_collection(
-        collection_name, metadata={"hnsw:space": "cosine"},
+        collection_name,
+        metadata={"hnsw:space": "cosine"},
     )
     collection.add(
         ids=[c["chunk_id"] for c in chunks],
@@ -109,8 +115,9 @@ def build_index(
         documents=[c["text"] for c in chunks],
         metadatas=[_metadata(c) for c in chunks],
     )
-    logger.info("indexed %d chunks into '%s' at %s",
-                collection.count(), collection_name, persist_dir)
+    logger.info(
+        "indexed %d chunks into '%s' at %s", collection.count(), collection_name, persist_dir
+    )
     return collection
 
 
@@ -124,7 +131,8 @@ def search(
     """Return the k nearest chunks to the query (plain similarity, no rerank yet)."""
     qvec = embed([query])[0]
     res = collection.query(
-        query_embeddings=[qvec], n_results=k,
+        query_embeddings=[qvec],
+        n_results=k,
         include=["documents", "metadatas", "distances"],
     )
     hits = []

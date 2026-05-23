@@ -37,18 +37,18 @@ OVERLAP_CHARS = 200
 # boilerplate in CFR print PDFs. These carry no regulatory content and
 # corrupt chunks if left in. Matched per-line, before newline collapse.
 NOISE_PATTERNS: list[re.Pattern[str]] = [
-    re.compile(r"^\s*\d{1,4}\s*$"),                       # bare page numbers
+    re.compile(r"^\s*\d{1,4}\s*$"),  # bare page numbers
     re.compile(r"Nat.?l Highway Traffic Safety Admin", re.I),
-    re.compile(r"49\s*CFR\s*Ch\.?\s*V", re.I),            # "... 49 CFR Ch. V (Edition)"
-    re.compile(r"VerDate\b.*", re.I),                     # typesetting timestamp line
+    re.compile(r"49\s*CFR\s*Ch\.?\s*V", re.I),  # "... 49 CFR Ch. V (Edition)"
+    re.compile(r"VerDate\b.*", re.I),  # typesetting timestamp line
     re.compile(r"\bJkt\b|\bPO\s*0{3,}|\bFrm\b|\bFmt\b|\bSfmt\b"),
-    re.compile(r"DSK\w+OFR|with \$\$_JOB", re.I),         # printer queue noise
-    re.compile(r"^\s*§\s*\d+\.\d+\s*$"),                  # bare running "§ 571.208"
-    re.compile(r"page\s+\d+\s+of\s+\d+", re.I),           # eCFR "page 35 of 134"
-    re.compile(r"\(enhanced display\)", re.I),            # eCFR running footer
-    re.compile(r"up to date as of", re.I),                # eCFR currency header
+    re.compile(r"DSK\w+OFR|with \$\$_JOB", re.I),  # printer queue noise
+    re.compile(r"^\s*§\s*\d+\.\d+\s*$"),  # bare running "§ 571.208"
+    re.compile(r"page\s+\d+\s+of\s+\d+", re.I),  # eCFR "page 35 of 134"
+    re.compile(r"\(enhanced display\)", re.I),  # eCFR running footer
+    re.compile(r"up to date as of", re.I),  # eCFR currency header
     re.compile(r"^Standard No\.\s*208[;:]?\s+Occupant crash protection", re.I),
-    re.compile(r"^49 CFR 571\.208 S\d"),                  # eCFR self-anchor header
+    re.compile(r"^49 CFR 571\.208 S\d"),  # eCFR self-anchor header
 ]
 
 # A heading line begins with an S-number token: S1, S4, S4.1, S4.1.2.1 ...
@@ -73,14 +73,14 @@ class Chunk:
 
     text: str
     regulation: str
-    section: str            # e.g. "571.208"
-    subsection: str         # most-granular S-number, e.g. "S4.1.2.1"
+    section: str  # e.g. "571.208"
+    subsection: str  # most-granular S-number, e.g. "S4.1.2.1"
     page: int
     effective_date: str
     source_url: str
     chunk_id: str
     parent_heading: str = ""
-    part_index: int = 0     # >0 only when one section was split for length
+    part_index: int = 0  # >0 only when one section was split for length
 
 
 @dataclass
@@ -96,7 +96,7 @@ class _Block:
 # ---------------------------------------------------------------------------
 # 1. Extraction (handles the two-column CFR print layout)
 # ---------------------------------------------------------------------------
-def _ordered_blocks(page: "fitz.Page", page_no: int) -> list[_Block]:
+def _ordered_blocks(page: fitz.Page, page_no: int) -> list[_Block]:
     """Return text blocks in human reading order, two-column aware.
 
     CFR print PDFs typeset two columns per page. PyMuPDF's raw block order
@@ -141,15 +141,14 @@ def _is_noise(line: str) -> bool:
 def clean_lines(pairs: list[tuple[str, int]]) -> list[tuple[str, int]]:
     """Drop header/footer/typesetting noise; keep page tags."""
     kept = [(ln, pg) for ln, pg in pairs if ln.strip() and not _is_noise(ln)]
-    logger.info("dropped %d noise lines (%d -> %d)",
-                len(pairs) - len(kept), len(pairs), len(kept))
+    logger.info("dropped %d noise lines (%d -> %d)", len(pairs) - len(kept), len(pairs), len(kept))
     return kept
 
 
 def _dehyphenate(text: str) -> str:
     """Rejoin words split by an end-of-line hyphen, then flatten newlines."""
     text = re.sub(r"(?<=[a-z])-\n(?=[a-z])", "", text)  # "se-\nverity" -> "severity"
-    text = re.sub(r"\s*\n\s*", " ", text)               # remaining breaks -> space
+    text = re.sub(r"\s*\n\s*", " ", text)  # remaining breaks -> space
     return re.sub(r"\s{2,}", " ", text).strip()
 
 
@@ -173,7 +172,7 @@ def _looks_like_heading(rest: str, s_number: str, seen: set[str]) -> bool:
     """
     if s_number in seen:
         return False
-    if rest and rest[0] in "(,;:":   # glued cross-ref: S5.1.2(a), S15,
+    if rest and rest[0] in "(,;:":  # glued cross-ref: S5.1.2(a), S15,
         return False
     title = rest.lstrip(" .")
     if title and title[0].islower():  # mid-sentence ref: "S5.1 with", "S7.2 of"
@@ -201,11 +200,10 @@ def parse_sections(pairs: list[tuple[str, int]]) -> list[_Section]:
             if title:
                 current.lines.append(title)
         elif current is not None:
-            current.lines.append(line)   # body line (incl. cross-ref look-alikes)
+            current.lines.append(line)  # body line (incl. cross-ref look-alikes)
         if m and not is_heading:
             rejected += 1
-    logger.info("parsed %d sections (rejected %d cross-ref look-alikes)",
-                len(sections), rejected)
+    logger.info("parsed %d sections (rejected %d cross-ref look-alikes)", len(sections), rejected)
     return sections
 
 
@@ -226,7 +224,7 @@ def _hard_window(text: str) -> list[str]:
     """Last-resort fixed-width split for a single over-long sentence."""
     parts, step, i = [], MAX_CHARS - OVERLAP_CHARS, 0
     while i < len(text):
-        parts.append(text[i:i + MAX_CHARS].strip())
+        parts.append(text[i : i + MAX_CHARS].strip())
         if i + MAX_CHARS >= len(text):
             break
         i += step
@@ -291,24 +289,30 @@ def build_chunks(
             cid = _slug(section_code, sec.s_number, sec.page)
             if i:
                 cid = f"{cid}_part{i + 1}"
-            while cid in used_ids:                  # guarantee uniqueness
+            while cid in used_ids:  # guarantee uniqueness
                 cid = f"{cid}_dup"
                 logger.warning("duplicate chunk_id resolved -> %s", cid)
             used_ids.add(cid)
-            chunks.append(Chunk(
-                text=part,
-                regulation=regulation,
-                section=section_code,
-                subsection=sec.s_number,
-                page=sec.page,
-                effective_date=effective_date,
-                source_url=source_url,
-                chunk_id=cid,
-                parent_heading=parent,
-                part_index=i,
-            ))
-    logger.info("built %d chunks from %d sections (dropped %d title-only parents)",
-                len(chunks), len(sections), dropped)
+            chunks.append(
+                Chunk(
+                    text=part,
+                    regulation=regulation,
+                    section=section_code,
+                    subsection=sec.s_number,
+                    page=sec.page,
+                    effective_date=effective_date,
+                    source_url=source_url,
+                    chunk_id=cid,
+                    parent_heading=parent,
+                    part_index=i,
+                )
+            )
+    logger.info(
+        "built %d chunks from %d sections (dropped %d title-only parents)",
+        len(chunks),
+        len(sections),
+        dropped,
+    )
     return chunks
 
 
@@ -325,16 +329,22 @@ def inspect(chunks: list[Chunk], n: int, seed: int = 7) -> None:
     no_parent = sum(1 for c in chunks if not c.parent_heading and "." in c.subsection)
 
     print("=" * 78)
-    print(f"CHUNK HEALTH:  total={len(chunks)}  "
-          f"mean_len={sum(lengths) // len(lengths)}  "
-          f"min={min(lengths)}  max={max(lengths)}")
-    print(f"  flags:  tiny(<80 chars)={tiny}  oversize(>{MAX_CHARS})={oversize}  "
-          f"missing_parent={no_parent}")
+    print(
+        f"CHUNK HEALTH:  total={len(chunks)}  "
+        f"mean_len={sum(lengths) // len(lengths)}  "
+        f"min={min(lengths)}  max={max(lengths)}"
+    )
+    print(
+        f"  flags:  tiny(<80 chars)={tiny}  oversize(>{MAX_CHARS})={oversize}  "
+        f"missing_parent={no_parent}"
+    )
     print("=" * 78)
     for i, c in enumerate(sample, 1):
         print(f"\n[{i}] chunk_id={c.chunk_id}")
-        print(f"    subsection={c.subsection}  parent={c.parent_heading or '-'}  "
-              f"page={c.page}  len={len(c.text)}  part={c.part_index}")
+        print(
+            f"    subsection={c.subsection}  parent={c.parent_heading or '-'}  "
+            f"page={c.page}  len={len(c.text)}  part={c.part_index}"
+        )
         preview = c.text if len(c.text) <= 320 else c.text[:317] + "..."
         print(f"    text: {preview}")
     print("\n" + "=" * 78)
@@ -368,12 +378,12 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("pdf", help="path to the source regulation PDF")
     p.add_argument("--regulation", default="FMVSS 571")
     p.add_argument("--section", default="571.208")
-    p.add_argument("--effective-date", default="UNKNOWN",
-                   help="ISO date of this regulation snapshot")
+    p.add_argument(
+        "--effective-date", default="UNKNOWN", help="ISO date of this regulation snapshot"
+    )
     p.add_argument("--source-url", default="")
     p.add_argument("--out", default="", help="optional JSON output path")
-    p.add_argument("--inspect", type=int, default=0,
-                   help="print N random chunk samples")
+    p.add_argument("--inspect", type=int, default=0, help="print N random chunk samples")
     return p
 
 
