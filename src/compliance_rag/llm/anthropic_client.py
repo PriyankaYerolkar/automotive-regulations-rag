@@ -1,5 +1,4 @@
 import logging
-
 import os
 
 import anthropic
@@ -15,7 +14,7 @@ class AnthropicClient:
 
     def __init__(self, model: str) -> None:
         self._client = anthropic.Anthropic(
-    api_key=os.getenv("ANTHROPIC_API_KEY")
+            api_key=os.getenv("ANTHROPIC_API_KEY")
         )  # reads ANTHROPIC_API_KEY from env
         self.model = model
 

@@ -48,10 +48,19 @@ def bait_hallucinated(answer: str, chunks: list[Chunk]) -> bool:
 def faithfulness(answer: str, chunks: list[Chunk], judge: LLMClient) -> float:
     """LLM-judged: 1.0 if all claims are supported by context, else 0.0."""
     context = "\n\n".join(c.text for c in chunks)
-    raw = judge.generate(
-        _JUDGE_SYSTEM, f"CONTEXT:\n{context}\n\nANSWER:\n{answer}",
-        temperature=0.0, max_tokens=512,
-    ).strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+    raw = (
+        judge.generate(
+            _JUDGE_SYSTEM,
+            f"CONTEXT:\n{context}\n\nANSWER:\n{answer}",
+            temperature=0.0,
+            max_tokens=512,
+        )
+        .strip()
+        .removeprefix("```json")
+        .removeprefix("```")
+        .removesuffix("```")
+        .strip()
+    )
     # Judge sometimes adds reasoning prose after the JSON — extract just the object
     match = re.search(r"\{.*?\}", raw, re.DOTALL)
     if not match:

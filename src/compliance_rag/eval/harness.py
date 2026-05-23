@@ -82,7 +82,10 @@ def run_model(model: str, items: list[EvalItem], judge_model: str) -> ModelRepor
         cat.setdefault(item.category, []).append(score)
     logger.info("Scored %s: %d answerable, %d bait failures", model, len(cit), len(bait_failures))
     return ModelReport(
-        model=model, n_answerable=len(cit), citation_accuracy=_mean(cit),
-        faithfulness=_mean(faith), bait_failures=bait_failures,
+        model=model,
+        n_answerable=len(cit),
+        citation_accuracy=_mean(cit),
+        faithfulness=_mean(faith),
+        bait_failures=bait_failures,
         per_category={k: _mean(v) for k, v in cat.items()},
     )
