@@ -136,7 +136,12 @@ def search(
         include=["documents", "metadatas", "distances"],
     )
     hits = []
-    for doc, meta, dist in zip(res["documents"][0], res["metadatas"][0], res["distances"][0]):
+    for doc, meta, dist in zip(
+    res["documents"][0],
+    res["metadatas"][0],
+    res["distances"][0],
+    strict=True,
+):
         hits.append({"distance": dist, "metadata": meta, "text": doc})
     return hits
 
