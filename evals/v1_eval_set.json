@@ -1,0 +1,122 @@
+[
+    {
+        "id": "direct_001",
+        "category": "direct_lookup",
+        "question": "What is the maximum allowable HIC value under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Head injury criteria. (a)(1) For any two points in time, t1 and t2, during the event which are separated by not more than a 36 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC36) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC36 value shall not exceed 1,000. (b) (1) For any two points in time, t1 and t2, during the event which are separated by not more than a 15 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC15) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC15 value shall not exceed 700.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.2",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_002",
+        "category": "direct_lookup",
+        "question": "What is the maximum allowable chest deflection under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Chest deflection. (a) Compressive deflection of the sternum relative to the spine shall not exceed 76 mm (3.0 in). (b) Compressive deflection of the sternum relative to the spine shall not exceed 63 mm (2.5 in).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.4",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "synth_001",
+        "category": "multi_section_synthesis",
+        "question": "What are the maximum values for both head injury criterion and chest deflection under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Head injury criteria. (a)(1) For any two points in time, t1 and t2, during the event which are separated by not more than a 36 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC36) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC36 value shall not exceed 1,000. (b) (1) For any two points in time, t1 and t2, during the event which are separated by not more than a 15 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC15) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC15 value shall not exceed 700.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.2",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Chest deflection. (a) Compressive deflection of the sternum relative to the spine shall not exceed 76 mm (3.0 in). (b) Compressive deflection of the sternum relative to the spine shall not exceed 63 mm (2.5 in).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.4",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "edge_001",
+        "category": "edge_case",
+        "question": "What is the maximum axial force allowed through each femur under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "The force transmitted axially through each femur shall not exceed 6805 N (1530 lb).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S15.3.5",
+                "page": 68,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "bait_001",
+        "category": "hallucination_bait",
+        "question": "Cite the §571.208 clause requiring biometric driver authentication before airbag arming.",
+        "is_bait": true,
+        "chunks": [
+            {
+                "text": "Chest deflection. (a) Compressive deflection of the sternum relative to the spine shall not exceed 76 mm (3.0 in). (b) Compressive deflection of the sternum relative to the spine shall not exceed 63 mm (2.5 in).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.4",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "bait_002",
+        "category": "hallucination_bait",
+        "question": "Which subsection of §571.208 sets the pedestrian airbag deployment timing?",
+        "is_bait": true,
+        "chunks": [
+            {
+                "text": "Chest deflection. (a) Compressive deflection of the sternum relative to the spine shall not exceed 76 mm (3.0 in). (b) Compressive deflection of the sternum relative to the spine shall not exceed 63 mm (2.5 in).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.4",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "bait_003",
+        "category": "hallucination_bait",
+        "question": "What HIC limit does §571.208 set for rear occupants in a side-impact test?",
+        "is_bait": true,
+        "chunks": [
+            {
+                "text": "Chest deflection. (a) Compressive deflection of the sternum relative to the spine shall not exceed 76 mm (3.0 in). (b) Compressive deflection of the sternum relative to the spine shall not exceed 63 mm (2.5 in).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.4",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    }
+]
