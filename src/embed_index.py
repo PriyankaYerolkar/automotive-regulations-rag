@@ -137,11 +137,11 @@ def search(
     )
     hits = []
     for doc, meta, dist in zip(
-    res["documents"][0],
-    res["metadatas"][0],
-    res["distances"][0],
-    strict=True,
-):
+        res["documents"][0],
+        res["metadatas"][0],
+        res["distances"][0],
+        strict=True,
+    ):
         hits.append({"distance": dist, "metadata": meta, "text": doc})
     return hits
 
