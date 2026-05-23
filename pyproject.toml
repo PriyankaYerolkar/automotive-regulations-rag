@@ -5,7 +5,7 @@ description = "A citation-grounded RAG system for automotive regulations (FMVSS,
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" }
+    { name = "Priyanka Yerolkar", email = "yerolkarp@gmail.com" }
 ]
 license = { text = "MIT" }
 keywords = ["rag", "automotive", "fmvss", "compliance", "homologation", "llm"]
@@ -31,8 +31,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/YOUR_GITHUB_USERNAME/automotive-regulations-rag"
-Repository = "https://github.com/YOUR_GITHUB_USERNAME/automotive-regulations-rag"
+Homepage = "https://github.com/priyankayerolkar/automotive-regulations-rag"
+Repository = "https://github.com/priyankayerolkar/automotive-regulations-rag"
 
 [build-system]
 requires = ["hatchling"]
