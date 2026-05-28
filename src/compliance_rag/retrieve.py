@@ -35,9 +35,9 @@ logger = logging.getLogger(__name__)
 # ── defaults ──────────────────────────────────────────────────────────────────
 COLLECTION = "fmvss_571_208"
 PERSIST_DIR = "data/chroma"
-TOP_K = 5            # final output size (Skill 1)
-CANDIDATE_K = 15     # oversample before MMR; ≥ 3× top_k is a safe floor
-MMR_LAMBDA = 0.5     # Skill 1: relevance/diversity balance
+TOP_K = 5  # final output size (Skill 1)
+CANDIDATE_K = 15  # oversample before MMR; ≥ 3× top_k is a safe floor
+MMR_LAMBDA = 0.5  # Skill 1: relevance/diversity balance
 
 
 # ── embedder protocol (mirrors embed_index.py) ───────────────────────────────
@@ -52,6 +52,7 @@ class Embedder(Protocol):
 
 
 # ── vector math ───────────────────────────────────────────────────────────────
+
 
 def _dot(a: list[float], b: list[float]) -> float:
     """Dot product; cosine similarity when both vectors are L2-normalised."""
@@ -70,6 +71,7 @@ def _unit(v: list[float]) -> list[float]:
 
 
 # ── Chroma query (reuses the query_embeddings pattern from embed_index.py) ───
+
 
 def _query_collection(
     query_vec: list[float],
@@ -102,7 +104,7 @@ def _query_collection(
     ):
         hits.append(
             {
-                "distance": dist,   # cosine distance; lower = more similar
+                "distance": dist,  # cosine distance; lower = more similar
                 "metadata": meta,
                 "text": doc,
                 "embedding": emb,
@@ -112,6 +114,7 @@ def _query_collection(
 
 
 # ── MMR rerank ────────────────────────────────────────────────────────────────
+
 
 def _mmr(
     query_vec: list[float],
@@ -160,9 +163,7 @@ def _mmr(
                 # First pick: pure relevance, no redundancy penalty yet.
                 redundancy = 0.0
             else:
-                redundancy = max(
-                    _dot(normed[i], normed[j]) for j in selected_indices
-                )
+                redundancy = max(_dot(normed[i], normed[j]) for j in selected_indices)
             score = lmbda * rel - (1.0 - lmbda) * redundancy
             if score > best_score:
                 best_score = score
@@ -177,6 +178,7 @@ def _mmr(
 
 
 # ── hit → Chunk conversion ────────────────────────────────────────────────────
+
 
 def _to_chunk(hit: dict) -> Chunk:
     """Convert a Chroma result dict to the Chunk dataclass expected by generate.py.
@@ -199,6 +201,7 @@ def _to_chunk(hit: dict) -> Chunk:
 
 
 # ── public API ────────────────────────────────────────────────────────────────
+
 
 def retrieve_chunks(
     query: str,
@@ -257,13 +260,18 @@ def retrieve_chunks(
         for i, c in enumerate(chunks, 1):
             logger.debug(
                 "[%d] §%s %s p.%d — %s…",
-                i, c.section, c.subsection, c.page, c.text[:80],
+                i,
+                c.section,
+                c.subsection,
+                c.page,
+                c.text[:80],
             )
 
     return chunks
 
 
 # ── CLI sanity check ──────────────────────────────────────────────────────────
+
 
 def _cli() -> None:
     import os
