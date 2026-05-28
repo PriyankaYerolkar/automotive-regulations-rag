@@ -10,7 +10,7 @@ class Settings:
     temperature: float = 0.1  # Skill 1: factual answers
     max_tokens: int = 1024
     top_k: int = 5  # Skill 1
-    mmr_lambda: float = 0.7   # was 0.5; regulatory Q&A needs relevance > diversity
+    mmr_lambda: float = 0.7  # was 0.5; regulatory Q&A needs relevance > diversity
 
 
 settings = Settings()
