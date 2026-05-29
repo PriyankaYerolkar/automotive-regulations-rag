@@ -32,6 +32,150 @@
         ]
     },
     {
+        "id": "direct_003",
+        "category": "direct_lookup",
+        "question": "What is the maximum resultant thoracic (chest) acceleration allowed under §571.208, and is there any exception?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "The resultant acceleration calculated from the output of the thoracic instrumentation shown in drawing 78051.218, revision R incorporated by reference in part 572, subpart E of this chapter shall not exceed 60 g's, except for intervals whose cumulative duration is not more than 3 milliseconds.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.3",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_004",
+        "category": "direct_lookup",
+        "question": "What is the maximum axial force allowed through each upper leg for the 50th-percentile adult male dummy under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "The force transmitted axially through each upper leg shall not exceed 2250 pounds.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.5",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_005",
+        "category": "direct_lookup",
+        "question": "What does §571.208 require regarding containment of the test dummy during a crash test?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "All portions of the test dummy shall be contained within the outer surfaces of the vehicle passenger compartment.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.1",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_006",
+        "category": "direct_lookup",
+        "question": "At what speed is the belted frontal barrier crash test conducted under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Belted test. (a) Vehicles not certified to S14. Impact a vehicle traveling longitudinally forward at any speed, up to and including 48 km/h (30 mph), into a fixed rigid barrier that is perpendicular to the line of travel of the vehicle, and at any angle up to 30 degrees in either direction from the perpendicular to the line of travel of the vehicle, under the applicable conditions of S8 and S10. The test dummy specified in S8.1.8 placed in each front outboard designated seating position shall meet the injury criteria of S6.1, S6.2(a), S6.3, S6.4(a), and S6.5 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.1.1",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_007",
+        "category": "direct_lookup",
+        "question": "At what speed is the lateral moving-barrier crash test conducted under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Lateral moving barrier crash test. Impact a vehicle laterally on either side by a barrier moving at 20 mph under the applicable conditions of S8. The test dummy specified in S8.1.8 positioned in the front outboard designated seating position adjacent to the impacted side shall meet the injury criteria of S6.2 and S6.3 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.2",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_008",
+        "category": "direct_lookup",
+        "question": "At what speed is the rollover test conducted under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Rollover. Subject a vehicle to a rollover test in either lateral direction at 30 mph under the applicable conditions of S8 of this standard with a test dummy specified in S8.1.8 placed in the front outboard designated seating position on the vehicle's lower side as mounted on the test platform. The test dummy shall meet the injury criteria of S6.1 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.3",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_009",
+        "category": "direct_lookup",
+        "question": "Over what time window are injury criteria calculated for barrier crashes under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Test duration for purpose of measuring injury criteria. (a) For all barrier crashes, the injury criteria specified in this standard shall be met when calculated based on data recorded for 300 milliseconds after the vehicle strikes the barrier.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.11",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_010",
+        "category": "direct_lookup",
+        "question": "Under §571.208, when metric and English units differ, which units are controlling?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Metric values. Specifications and requirements are given in metric units with English units provided for reference. The metric values are controlling.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.10",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "direct_011",
+        "category": "direct_lookup",
+        "question": "What filter must be applied to data channels used in injury-criteria calculations under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Data channels. For vehicles manufactured on or after September 1, 2001, all data channels used in injury criteria calculations shall be filtered using a phaseless digital filter, such as the Butterworth four-pole phaseless digital filter specified in appendix C of SAE Recommended Practice J211/1 MAR95 (incorporated by reference, see § 571.5).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.13",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
         "id": "synth_001",
         "category": "multi_section_synthesis",
         "question": "What are the maximum values for both head injury criterion and chest deflection under §571.208?",
@@ -56,9 +200,185 @@
         ]
     },
     {
+        "id": "synth_002",
+        "category": "multi_section_synthesis",
+        "question": "List the injury thresholds §571.208 sets for the 50th-percentile adult male dummy (containment, head, chest acceleration, chest deflection, and upper leg).",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "All portions of the test dummy shall be contained within the outer surfaces of the vehicle passenger compartment.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.1",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Head injury criteria. (a)(1) For any two points in time, t1 and t2, during the event which are separated by not more than a 36 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC36) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC36 value shall not exceed 1,000. (b) (1) For any two points in time, t1 and t2, during the event which are separated by not more than a 15 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC15) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC15 value shall not exceed 700.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.2",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "The resultant acceleration calculated from the output of the thoracic instrumentation shown in drawing 78051.218, revision R incorporated by reference in part 572, subpart E of this chapter shall not exceed 60 g's, except for intervals whose cumulative duration is not more than 3 milliseconds.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.3",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Chest deflection. (a) Compressive deflection of the sternum relative to the spine shall not exceed 76 mm (3.0 in). (b) Compressive deflection of the sternum relative to the spine shall not exceed 63 mm (2.5 in).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.4",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "The force transmitted axially through each upper leg shall not exceed 2250 pounds.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.5",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "synth_003",
+        "category": "multi_section_synthesis",
+        "question": "What is the maximum axial leg/femur force under §571.208, and does it differ between the 50th-percentile male and 5th-percentile female dummies?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "The force transmitted axially through each upper leg shall not exceed 2250 pounds.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.5",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "The force transmitted axially through each femur shall not exceed 6805 N (1530 lb).",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S15.3.5",
+                "page": 68,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "synth_004",
+        "category": "multi_section_synthesis",
+        "question": "How do the belted and unbelted frontal crash test speeds differ under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Belted test. (a) Vehicles not certified to S14. Impact a vehicle traveling longitudinally forward at any speed, up to and including 48 km/h (30 mph), into a fixed rigid barrier that is perpendicular to the line of travel of the vehicle, and at any angle up to 30 degrees in either direction from the perpendicular to the line of travel of the vehicle, under the applicable conditions of S8 and S10. The test dummy specified in S8.1.8 placed in each front outboard designated seating position shall meet the injury criteria of S6.1, S6.2(a), S6.3, S6.4(a), and S6.5 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.1.1",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Unbelted test. (a) Vehicles not certified to the requirements of S13 or S14. At the manufacturer's option, either one of the following unbelted tests shall be met: (1) Impact a vehicle traveling longitudinally forward at any speed up to and including 48 km/h (30 mph), into a fixed rigid barrier that is perpendicular to the line of travel of the vehicle, and at any angle up to 30 degrees in either direction from the perpendicular to the line of travel of the vehicle, under the applicable conditions of S8 and S10, excluding S10.7, S10.8, and S10.9. (2) Impact a vehicle traveling longitudinally forward at any speed between 32 km/h (20 mph) and 40 km/h (25 mph), inclusive, into a fixed rigid barrier that is perpendicular to the line of travel of the vehicle, and at any angle up to 30 degrees in either direction from the perpendicular to the line of travel of the vehicle, under the applicable conditions of S8 and S10, excluding S10.7, S10.8, and S10.9.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.1.2",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "synth_005",
+        "category": "multi_section_synthesis",
+        "question": "Which injury criteria apply in the frontal, lateral, and rollover tests under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Belted test. (a) Vehicles not certified to S14. Impact a vehicle traveling longitudinally forward at any speed, up to and including 48 km/h (30 mph), into a fixed rigid barrier that is perpendicular to the line of travel of the vehicle, and at any angle up to 30 degrees in either direction from the perpendicular to the line of travel of the vehicle, under the applicable conditions of S8 and S10. The test dummy specified in S8.1.8 placed in each front outboard designated seating position shall meet the injury criteria of S6.1, S6.2(a), S6.3, S6.4(a), and S6.5 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.1.1",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Lateral moving barrier crash test. Impact a vehicle laterally on either side by a barrier moving at 20 mph under the applicable conditions of S8. The test dummy specified in S8.1.8 positioned in the front outboard designated seating position adjacent to the impacted side shall meet the injury criteria of S6.2 and S6.3 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.2",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Rollover. Subject a vehicle to a rollover test in either lateral direction at 30 mph under the applicable conditions of S8 of this standard with a test dummy specified in S8.1.8 placed in the front outboard designated seating position on the vehicle's lower side as mounted on the test platform. The test dummy shall meet the injury criteria of S6.1 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.3",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "synth_006",
+        "category": "multi_section_synthesis",
+        "question": "When do the front and rear seat-belt-warning requirements take effect for passenger cars under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Front seat belt warnings for passenger cars manufactured on or after September 1, 2026. Any front outboard designated seating position and any inboard designated seating position for which a seat belt warning is required in S4.1.5.6 shall comply with S7.5 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.1.5.7",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Rear seat belt warnings for passenger cars manufactured on or after September 1, 2027. All rear designated seating positions, except in law enforcement vehicles, shall comply with S7.5 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.1.5.8",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "synth_007",
+        "category": "multi_section_synthesis",
+        "question": "What is the difference between HIC36 and HIC15 under §571.208, and in which test does each limit apply?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Head injury criteria. (a)(1) For any two points in time, t1 and t2, during the event which are separated by not more than a 36 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC36) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC36 value shall not exceed 1,000. (b) (1) For any two points in time, t1 and t2, during the event which are separated by not more than a 15 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC15) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC15 value shall not exceed 700.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.2",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            },
+            {
+                "text": "Belted test. (a) Vehicles not certified to S14. Impact a vehicle traveling longitudinally forward at any speed, up to and including 48 km/h (30 mph), into a fixed rigid barrier that is perpendicular to the line of travel of the vehicle, and at any angle up to 30 degrees in either direction from the perpendicular to the line of travel of the vehicle, under the applicable conditions of S8 and S10. The test dummy specified in S8.1.8 placed in each front outboard designated seating position shall meet the injury criteria of S6.1, S6.2(a), S6.3, S6.4(a), and S6.5 of this standard.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S5.1.1",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
         "id": "edge_001",
         "category": "edge_case",
-        "question": "What is the maximum axial force allowed through each femur under §571.208?",
+        "question": "What is the maximum axial force allowed through each femur for the 5th-percentile adult female dummy under §571.208?",
         "is_bait": false,
         "chunks": [
             {
@@ -67,6 +387,86 @@
                 "section": "571.208",
                 "subsection": "S15.3.5",
                 "page": 68,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "edge_002",
+        "category": "edge_case",
+        "question": "What does §571.208 require for vehicles without manually operated driving controls?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "As specified in S4.1.5.6.1 and S4.1.5.6.2, the vehicles shall meet the frontal crash protection requirements of S5.1.2(b) as specified for front outboard passenger designated seating positions by means of an inflatable restraint system that requires no action by vehicle occupants and the requirements of S14, as specified for front outboard passenger designated seating positions.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.1.5.6.3",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "edge_003",
+        "category": "edge_case",
+        "question": "Under what conditions may a vehicle be equipped with a passenger air bag manual cut-off device under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Passenger air bag manual cut-off device. Passenger cars, trucks, buses, and multipurpose passenger vehicles manufactured before September 1, 2012 may be equipped with a device that deactivates the air bag installed at the right front outboard seating position in the vehicle, if all the conditions in S4.5.4.1 through S4.5.4.4 are satisfied.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.5.4",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "edge_004",
+        "category": "edge_case",
+        "question": "What are the dummy positioning angle tolerances specified in §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Values and tolerances. Wherever a range of values or tolerances are specified, requirements shall be met at all values within the range of values or tolerances. With respect to the positioning of anthropomorphic dummies, torso and spine angle tolerances shall be ±2 degrees unless otherwise stated, and leg, thigh, foot, and arm angle tolerances shall be ±5 degrees unless otherwise stated.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.9",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "edge_005",
+        "category": "edge_case",
+        "question": "Does §571.208 require a readiness indicator for the occupant protection system, and where must it be visible?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Readiness indicator. An occupant protection system that deploys in the event of a crash shall have a monitoring system with a readiness indicator. The indicator shall monitor its own readiness and shall be clearly visible from the driver's designated seating position.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.5.2",
+                "page": 0,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "edge_006",
+        "category": "edge_case",
+        "question": "What are the format requirements for the sun visor air bag warning label under §571.208?",
+        "is_bait": false,
+        "chunks": [
+            {
+                "text": "Sun visor air bag warning label. Each vehicle shall have a label permanently affixed to either side of the sun visor, at the manufacturer's option, at each front outboard seating position that is equipped with an inflatable restraint. The label shall conform in content to the label shown in either Figure 6a or 6b of this standard. (i) The heading area shall be yellow with the word “WARNING” and the alert symbol in black. (ii) The message area shall be white with black text. The message area shall be no less than 30 cm2 (4.7 in2). (iii) The pictogram shall be black with a red circle and slash on a white background. The pictogram shall be no less than 30 mm (1.2 in) in diameter.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S4.5.1(b)",
+                "page": 0,
                 "effective_date": "2026-05-15"
             }
         ]
@@ -114,6 +514,54 @@
                 "regulation": "FMVSS",
                 "section": "571.208",
                 "subsection": "S6.4",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "bait_004",
+        "category": "hallucination_bait",
+        "question": "Cite the §571.208 clause requiring an EV battery thermal-runaway suppression system.",
+        "is_bait": true,
+        "chunks": [
+            {
+                "text": "The force transmitted axially through each upper leg shall not exceed 2250 pounds.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.5",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "bait_005",
+        "category": "hallucination_bait",
+        "question": "Which subsection of §571.208 mandates a lane-departure warning or ADAS system?",
+        "is_bait": true,
+        "chunks": [
+            {
+                "text": "The resultant acceleration calculated from the output of the thoracic instrumentation shown in drawing 78051.218, revision R incorporated by reference in part 572, subpart E of this chapter shall not exceed 60 g's, except for intervals whose cumulative duration is not more than 3 milliseconds.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.3",
+                "page": 37,
+                "effective_date": "2026-05-15"
+            }
+        ]
+    },
+    {
+        "id": "bait_006",
+        "category": "hallucination_bait",
+        "question": "What maximum airbag inflation pressure (in kPa) does §571.208 specify?",
+        "is_bait": true,
+        "chunks": [
+            {
+                "text": "Head injury criteria. (a)(1) For any two points in time, t1 and t2, during the event which are separated by not more than a 36 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC36) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC36 value shall not exceed 1,000. (b) (1) For any two points in time, t1 and t2, during the event which are separated by not more than a 15 millisecond time interval and where t1 is less than t2, the head injury criterion (HIC15) shall be determined using the resultant head acceleration at the center of gravity of the dummy head, ar, expressed as a multiple of g (the acceleration of gravity) and shall be calculated using the expression: (2) The maximum calculated HIC15 value shall not exceed 700.",
+                "regulation": "FMVSS",
+                "section": "571.208",
+                "subsection": "S6.2",
                 "page": 37,
                 "effective_date": "2026-05-15"
             }
