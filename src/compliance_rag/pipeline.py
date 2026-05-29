@@ -22,16 +22,19 @@ import argparse
 import logging
 import os
 import sys
-
 from pathlib import Path
-from dotenv import load_dotenv
-load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=True)
 
 import chromadb
+from dotenv import load_dotenv
 
 from .config import settings
 from .generate import generate_answer
 from .retrieve import retrieve_chunks
+
+# Load the project's .env explicitly so a stale parent-directory .env or a
+# stale session env var cannot shadow the real keys. override=True makes the
+# .env file authoritative over any existing process env vars.
+load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=True)
 
 logger = logging.getLogger(__name__)
 
