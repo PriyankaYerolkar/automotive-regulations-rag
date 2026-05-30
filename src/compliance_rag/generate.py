@@ -25,6 +25,7 @@ _SYSTEM = (
 # worth prepending to context — only real descriptive titles are.
 _BARE_SNUM = re.compile(r"S[0-9.]+")
 
+
 @dataclass(frozen=True)
 class Chunk:
     """A retrieved chunk plus the metadata needed to render a Skill 3 citation."""

@@ -11,8 +11,8 @@ class Settings:
     max_tokens: int = 1024
     top_k: int = 5  # Skill 1
     mmr_lambda: float = 0.7  # raised 0.5→0.7 (2026-05-28): regulatory Q&A favors
-                              # relevance over diversity; S6.2 deferred to rank 5
-                              # at 0.5, rank 4 at 0.7. Re-tune after 30-question eval.
+    # relevance over diversity; S6.2 deferred to rank 5
+    # at 0.5, rank 4 at 0.7. Re-tune after 30-question eval.
 
 
 settings = Settings()
