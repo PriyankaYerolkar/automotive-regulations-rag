@@ -7,7 +7,8 @@ from ..generate import Chunk, generate_answer
 from ..llm.factory import build_llm
 from .scoring import bait_hallucinated, citation_score, faithfulness
 
-_CHUNK_FIELDS = {"text", "regulation", "section", "subsection", "page", "effective_date", "parent_heading"}
+_CHUNK_FIELDS = {"text", "regulation", "section", "subsection",
+                 "page", "effective_date", "parent_heading"}
 
 logger = logging.getLogger(__name__)
 
