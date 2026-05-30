@@ -71,7 +71,7 @@ def generate_answer(question: str, chunks: list[Chunk], *, llm: LLMClient | None
     if not chunks:
         logger.warning("generate_answer called with no chunks for: %s", question)
         return "\n\n".join(["I could not find this in the retrieved documents.", DISCLAIMER])
- 
+
     client = llm or build_llm(settings.llm_model)  # eval injects the arm under test
     user = f"Context:\n{_build_context(chunks)}\n\nQuestion: {question}"
     answer = client.generate(

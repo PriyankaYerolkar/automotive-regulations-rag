@@ -2,7 +2,7 @@ import json
 import logging
 import re
 
-from ..generate import Chunk, DISCLAIMER, _build_context, render_citation
+from ..generate import DISCLAIMER, Chunk, _build_context, render_citation
 from ..llm.base import LLMClient
 
 logger = logging.getLogger(__name__)
