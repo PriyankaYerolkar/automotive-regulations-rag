@@ -8,7 +8,7 @@ from ..llm.base import LLMClient
 logger = logging.getLogger(__name__)
 
 REFUSAL = "i could not find this in the retrieved documents"
-_TAG_RE = re.compile(r"\[Source:[^\]]+\]")
+_TAG_RE = re.compile(r"\[Source:[^\]]+\")
 _JUDGE_SYSTEM = (
     "You are a strict grader. Given CONTEXT and an ANSWER, decide whether every "
     "substantive factual claim in the ANSWER is supported by the CONTEXT. The CONTEXT "

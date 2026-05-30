@@ -197,6 +197,8 @@ def _to_chunk(hit: dict) -> Chunk:
         subsection=str(m.get("subsection", "")),
         page=int(m.get("page", 0)),
         effective_date=str(m.get("effective_date", "")),
+        effective_date=str(m.get("effective_date", "")),
+        parent_heading=str(m.get("parent_heading", "")),    
     )
 
 

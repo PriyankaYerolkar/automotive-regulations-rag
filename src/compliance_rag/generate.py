@@ -1,4 +1,5 @@
 import logging
+import re
 from dataclasses import dataclass
 
 from .config import settings
@@ -20,6 +21,9 @@ _SYSTEM = (
     "'I could not find this in the retrieved documents.'"
 )
 
+# Bare section numbers (e.g. "S6", "S15.3") carry no qualifier, so they are not
+# worth prepending to context — only real descriptive titles are.
+_BARE_SNUM = re.compile(r"S[0-9.]+")
 
 @dataclass(frozen=True)
 class Chunk:
@@ -31,6 +35,10 @@ class Chunk:
     subsection: str
     page: int
     effective_date: str
+    # Parent section heading (e.g. "Injury criteria for the 5th percentile adult
+    # female dummy"). Carries dummy/vehicle-class qualifiers the paragraph text
+    # omits. Defaults to "" so existing callers keep working.
+    parent_heading: str = ""
 
 
 def render_citation(chunk: Chunk) -> str:
@@ -42,8 +50,20 @@ def render_citation(chunk: Chunk) -> str:
 
 
 def _build_context(chunks: list[Chunk]) -> str:
-    """Pair each chunk's text with its pre-rendered citation tag for the prompt."""
-    return "\n\n".join(f"{c.text}\n{render_citation(c)}" for c in chunks)
+    """Pair each chunk's parent heading + text with its pre-rendered citation tag.
+
+    The parent section heading carries qualifiers (dummy size, vehicle class) that
+    the bare paragraph omits. Including it lets the model answer questions that hinge
+    on those qualifiers faithfully, instead of refusing because the paragraph never
+    restates them. The heading is context only — it is NOT part of the citation tag.
+    """
+    blocks: list[str] = []
+    for c in chunks:
+        head_text = c.parent_heading.strip()
+        show = bool(head_text) and not _BARE_SNUM.fullmatch(head_text)
+        head = f"[{head_text}]\n" if show else ""
+        blocks.append(f"{head}{c.text}\n{render_citation(c)}")
+    return "\n\n".join(blocks)
 
 
 def generate_answer(question: str, chunks: list[Chunk], *, llm: LLMClient | None = None) -> str:
@@ -51,7 +71,7 @@ def generate_answer(question: str, chunks: list[Chunk], *, llm: LLMClient | None
     if not chunks:
         logger.warning("generate_answer called with no chunks for: %s", question)
         return "\n\n".join(["I could not find this in the retrieved documents.", DISCLAIMER])
-
+ 
     client = llm or build_llm(settings.llm_model)  # eval injects the arm under test
     user = f"Context:\n{_build_context(chunks)}\n\nQuestion: {question}"
     answer = client.generate(
