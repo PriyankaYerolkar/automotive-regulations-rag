@@ -22,8 +22,14 @@ from pathlib import Path
 from typing import Protocol
 
 import chromadb
+from dotenv import load_dotenv
 
 logger = logging.getLogger("embed_index")
+
+# Load the project's .env explicitly with override=True so a stale shell-level
+# OPENAI_API_KEY cannot shadow the real key (same fix as pipeline.py). __file__
+# is src/embed_index.py, so parents[1] is the project root that holds .env.
+load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=True)
 
 MODEL = "text-embedding-3-small"  # 1536-dim; needs no query/passage prefix
 EMBED_BATCH = 256  # inputs per API call (limit is 2048 / 8191 tok)

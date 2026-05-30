@@ -207,14 +207,25 @@ def parse_sections(pairs: list[tuple[str, int]]) -> list[_Section]:
     return sections
 
 
-def _parent_of(s_number: str, known: set[str]) -> str:
-    """Nearest ancestor S-number that exists in the document, else ''."""
+def _parent_heading(s_number: str, heading_titles: dict[str, str]) -> str:
+    """Descriptive heading breadcrumb from ancestor section titles, outermost first.
+
+    Walks every proper ancestor of s_number and joins the descriptive titles that
+    were harvested from title-only parent sections. e.g.
+        S15.3.5     -> "Injury criteria for the 5th percentile adult female test dummy"
+        S4.1.5.6.3  -> "... in passenger cars without manually operated driving controls"
+    Returns "" when no ancestor carried a descriptive title. This replaces the old
+    bare-number parent (e.g. "S15.3"), which never conveyed dummy size or vehicle
+    class — the qualifiers that questions actually hinge on.
+    """
     parts = s_number.split(".")
-    for cut in range(len(parts) - 1, 0, -1):
-        candidate = ".".join(parts[:cut])
-        if candidate in known:
-            return candidate
-    return ""
+    titles: list[str] = []
+    for cut in range(1, len(parts)):  # every proper ancestor, outermost first
+        ancestor = ".".join(parts[:cut])
+        title = heading_titles.get(ancestor)
+        if title and title not in titles:
+            titles.append(title)
+    return " \u2014 ".join(titles)
 
 
 # ---------------------------------------------------------------------------
@@ -271,20 +282,34 @@ def build_chunks(
 ) -> list[Chunk]:
     """Convert parsed sections into citation-ready chunks."""
     known = {s.s_number for s in sections}
+
+    # First pass: dehyphenate each section body once, and harvest the descriptive
+    # titles of title-only parent sections (the same ones dropped below) keyed by
+    # S-number. These carry the qualifiers (dummy size, vehicle class) that the
+    # leaf paragraphs omit, so children can cite them as parent_heading instead of
+    # a bare ancestor number.
+    bodies: dict[str, str] = {}
+    heading_titles: dict[str, str] = {}
+    for sec in sections:
+        body = _dehyphenate("\n".join(sec.lines))
+        bodies[sec.s_number] = body
+        if body and len(body) < HEADING_TITLE_MAXLEN and _has_children(sec.s_number, known):
+            heading_titles[sec.s_number] = body
+
     used_ids: set[str] = set()
     chunks: list[Chunk] = []
     dropped = 0
     for sec in sections:
-        body = _dehyphenate("\n".join(sec.lines))
+        body = bodies[sec.s_number]
         if not body:
             continue
-        # Skip a parent section whose text is only its title — the title is
-        # carried on its children via parent_heading, so a standalone
-        # title-only chunk would just be retrieval noise.
+        # Skip a parent section whose text is only its title — the title is now
+        # carried on its children via parent_heading (see heading_titles above),
+        # so a standalone title-only chunk would just be retrieval noise.
         if len(body) < HEADING_TITLE_MAXLEN and _has_children(sec.s_number, known):
             dropped += 1
             continue
-        parent = _parent_of(sec.s_number, known)
+        parent = _parent_heading(sec.s_number, heading_titles)
         for i, part in enumerate(_split_long(body)):
             cid = _slug(section_code, sec.s_number, sec.page)
             if i:
