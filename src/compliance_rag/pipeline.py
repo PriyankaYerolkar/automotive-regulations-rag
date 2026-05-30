@@ -101,21 +101,19 @@ def answer(
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
+
 def _cli() -> None:
     from dotenv import load_dotenv
-    load_dotenv()          # reads .env from cwd; no-op if not found
+
+    load_dotenv()  # reads .env from cwd; no-op if not found
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 
     parser = argparse.ArgumentParser(
         description="Ask a compliance question against the FMVSS RAG pipeline."
     )
     parser.add_argument("question", help="compliance question in natural language")
-    parser.add_argument(
-        "--persist", default=_PERSIST, help="Chroma persist directory"
-    )
-    parser.add_argument(
-        "--collection", default=_COLLECTION, help="Chroma collection name"
-    )
+    parser.add_argument("--persist", default=_PERSIST, help="Chroma persist directory")
+    parser.add_argument("--collection", default=_COLLECTION, help="Chroma collection name")
     args = parser.parse_args()
 
     if not os.getenv("OPENAI_API_KEY"):
