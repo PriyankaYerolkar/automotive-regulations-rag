@@ -4,7 +4,7 @@ Pipeline stage (skills.md Skill 1):
     retrieve -> rerank -> generate -> cite
 
 This module is the single entry point for answering a compliance question.
-It wires retrieve_chunks() → generate_answer() and owns nothing else.
+It wires retrieve_chunks() -> generate_answer() and owns nothing else.
 
 Usage (CLI):
     python -m src.compliance_rag.pipeline \\
@@ -14,6 +14,14 @@ Usage (module):
     from src.compliance_rag.pipeline import answer
     result = answer("What is the HIC limit under FMVSS 571.208?")
     print(result)
+
+    # When you also need the retrieved chunks (e.g. to render a source panel
+    # in the demo UI), use answer_with_sources() instead:
+    from src.compliance_rag.pipeline import answer_with_sources
+    res = answer_with_sources("What is the HIC limit under FMVSS 571.208?")
+    print(res.answer)
+    for c in res.chunks:
+        ...
 """
 
 from __future__ import annotations
@@ -22,25 +30,41 @@ import argparse
 import logging
 import os
 import sys
+from dataclasses import dataclass
 from pathlib import Path
 
 import chromadb
 from dotenv import load_dotenv
 
 from .config import settings
-from .generate import generate_answer
+from .generate import Chunk, generate_answer
 from .retrieve import retrieve_chunks
 
 # Load the project's .env explicitly so a stale parent-directory .env or a
 # stale session env var cannot shadow the real keys. override=True makes the
 # .env file authoritative over any existing process env vars.
+#
+# On Hugging Face Spaces there is no .env file (secrets are injected as plain
+# env vars), so this call is a harmless no-op there and os.getenv still works.
 load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=True)
 
 logger = logging.getLogger(__name__)
 
-# ── defaults (override via CLI flags or by editing config.py) ─────────────────
+# -- defaults (override via CLI flags or by editing config.py) -----------------
 _PERSIST = "data/chroma"
 _COLLECTION = "fmvss_571_208"
+
+
+@dataclass(frozen=True)
+class QueryResult:
+    """A generated answer plus the chunks that were retrieved to produce it.
+
+    The UI uses `chunks` to render a "retrieved sources" panel. `answer` is the
+    exact string a plain `answer()` call would return (cited + disclaimer).
+    """
+
+    answer: str
+    chunks: list[Chunk]
 
 
 def _get_embedder():  # type: ignore[return]
@@ -57,13 +81,13 @@ def _get_embedder():  # type: ignore[return]
     return OpenAIEmbedder()
 
 
-def answer(
+def answer_with_sources(
     question: str,
     *,
     persist: str = _PERSIST,
     collection_name: str = _COLLECTION,
-) -> str:
-    """Run the full retrieve → generate pipeline for one question.
+) -> QueryResult:
+    """Run the full retrieve -> generate pipeline and return answer + chunks.
 
     Args:
         question:        Natural-language compliance question.
@@ -71,7 +95,7 @@ def answer(
         collection_name: Chroma collection name (default: fmvss_571_208).
 
     Returns:
-        Cited answer string with the Skill 3 disclaimer appended.
+        QueryResult with the cited answer string and the retrieved chunks.
     """
     if not question.strip():
         raise ValueError("question must not be empty")
@@ -86,25 +110,39 @@ def answer(
         embedder,
         collection,
         top_k=settings.top_k,
-        candidate_k=settings.top_k * 3,  # 3× oversample (Skill 1)
+        candidate_k=settings.top_k * 3,  # 3x oversample (Skill 1)
         mmr_lambda=settings.mmr_lambda,
     )
 
-    logger.info(
-        "retrieved %d chunks for: %s",
-        len(chunks),
-        question[:80],
-    )
+    logger.info("retrieved %d chunks for: %s", len(chunks), question[:80])
 
-    return generate_answer(question, chunks)
+    text = generate_answer(question, chunks)
+    return QueryResult(answer=text, chunks=chunks)
 
 
-# ── CLI ───────────────────────────────────────────────────────────────────────
+def answer(
+    question: str,
+    *,
+    persist: str = _PERSIST,
+    collection_name: str = _COLLECTION,
+) -> str:
+    """Run the full retrieve -> generate pipeline for one question.
+
+    Thin wrapper over answer_with_sources() so both share one code path; the
+    eval harness and CLI keep using this unchanged.
+
+    Returns:
+        Cited answer string with the Skill 3 disclaimer appended.
+    """
+    return answer_with_sources(
+        question, persist=persist, collection_name=collection_name
+    ).answer
+
+
+# -- CLI -----------------------------------------------------------------------
 
 
 def _cli() -> None:
-    from dotenv import load_dotenv
-
     load_dotenv()  # reads .env from cwd; no-op if not found
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 
@@ -117,9 +155,9 @@ def _cli() -> None:
     args = parser.parse_args()
 
     if not os.getenv("OPENAI_API_KEY"):
-        raise SystemExit("OPENAI_API_KEY is not set — see .env.example")
+        raise SystemExit("OPENAI_API_KEY is not set - see .env.example")
     if not os.getenv("ANTHROPIC_API_KEY"):
-        raise SystemExit("ANTHROPIC_API_KEY is not set — see .env.example")
+        raise SystemExit("ANTHROPIC_API_KEY is not set - see .env.example")
 
     result = answer(
         args.question,
