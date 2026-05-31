@@ -134,9 +134,7 @@ def answer(
     Returns:
         Cited answer string with the Skill 3 disclaimer appended.
     """
-    return answer_with_sources(
-        question, persist=persist, collection_name=collection_name
-    ).answer
+    return answer_with_sources(question, persist=persist, collection_name=collection_name).answer
 
 
 # -- CLI -----------------------------------------------------------------------
