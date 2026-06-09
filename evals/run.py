@@ -1,4 +1,5 @@
 """Run the V1 eval across Sonnet and Haiku; print a comparison table, log each run."""
+import os
 import json
 import logging
 import re
@@ -14,7 +15,10 @@ from compliance_rag.eval.harness import EvalItem, ModelReport, load_eval_set, ru
 
 logging.basicConfig(level=logging.INFO)
 
-EVAL_SET = Path(__file__).parent / "v1_eval_set.json"
+# after — public repo ships the 6-item sample; point at the private
+# 30-item gold set locally via the EVAL_SET env var.
+_DEFAULT_EVAL = Path(__file__).parent / "sample_eval_set.json"
+EVAL_SET = Path(os.environ.get("EVAL_SET", _DEFAULT_EVAL))
 RUNS_DIR = Path(__file__).parent / "runs"
 JUDGE_MODEL = "claude-sonnet-4-6"
 ARMS = ["claude-sonnet-4-6", "claude-haiku-4-5-20251001"]
@@ -60,6 +64,14 @@ def _print_table(reports: list[ModelReport]) -> None:
 
 
 def main() -> None:
+    if not EVAL_SET.exists():
+        raise SystemExit(
+            f"Eval set not found: {EVAL_SET}\n"
+            "The public repo ships evals/sample_eval_set.json (6 items, smoke test).\n"
+            "For the full 30-item gold set, set EVAL_SET to your private copy:\n"
+            '  PowerShell:  $env:EVAL_SET = "C:\\path\\to\\v1_eval_set.json"\n'
+            "  bash:        export EVAL_SET=/path/to/v1_eval_set.json"
+        )
     items = load_eval_set(EVAL_SET)
     assert_ready(items)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
