@@ -46,7 +46,7 @@ def render_citation(chunk: Chunk) -> str:
     """Build the trusted, code-controlled Skill 3 citation tag."""
     return (
         f"[Source: {chunk.regulation} §{chunk.section} {chunk.subsection}, "
-        f"p.{chunk.page} — effective {chunk.effective_date}]"
+        f"p.{chunk.page} — eCFR current as of {chunk.effective_date}]"
     )
 
 
